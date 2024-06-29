@@ -1,12 +1,24 @@
 <template>
-  <div class="container">
-    <div v-for="item in items" :key="item.id" :class="['item', { active: item.isActive }]" @click="toggleActive(item)">
-      <div :class="['text', { hidden: item.isActive }]">
-        <span class="text__clinic">{{ item.clinic }}</span>
-        <span class="text__name">{{ item.name }}</span>
-        <span class="text__position">{{ item.position }}</span>
+  <div class="slider">
+    <div class="slider__header">
+      <button class="button" @click="moveLeft">
+        Left
+      </button>
+
+      <button class="button" @click="moveRight">
+        Right
+      </button>
+    </div>
+
+    <div class="slider-wrapper">
+      <div v-for="item in items" :key="item.id" :class="['item', { active: item.isActive }]" @click="toggleActive(item)">
+        <div :class="['text', { hidden: item.isActive }]">
+          <span class="text__clinic">{{ item.clinic }}</span>
+          <span class="text__name">{{ item.name }}</span>
+          <span class="text__position">{{ item.position }}</span>
+        </div>
+        <img class="img" :src="item.image" alt="" />
       </div>
-      <img class="img" :src="item.image" alt="" />
     </div>
   </div>
 </template>
@@ -20,66 +32,36 @@ const items = ref([
     name: 'Круглик Сергей Викторович',
     position: 'Заведующий отделением пластической хирургии',
     clinic: 'Vip Clinic',
-		image: '/images/rev1.png',
-		isActive: true
+    image: '/images/rev1.png',
+    isActive: true
   },
   {
     id: 2,
     name: 'Доктор #2',
     position: 'Должность второго доктора',
     clinic: 'Vip Clinic',
-		image: '/images/rev2.png',
-		isActive: false
+    image: '/images/rev2.png',
+    isActive: false
   },
   {
     id: 3,
     name: 'Доктор #3',
     position: 'Должность третьего доктора',
     clinic: 'Vip Clinic',
-		image: '/images/rev3.png',
-		isActive: false
+    image: '/images/rev3.png',
+    isActive: false
   },
   {
     id: 4,
     name: 'Доктор #4',
     position: 'Должность четвертого доктора',
     clinic: 'Vip Clinic',
-		image: '/images/rev4.png',
-		isActive: false
+    image: '/images/rev4.png',
+    isActive: false
   },
-	// {
-	// 	id: 5,
-	// 	name: 'Круглик Сергей Викторович',
-	// 	position: 'Заведующий отделением пластической хирургии',
-	// 	clinic: 'Vip Clinic',
-	// 	image: '/images/rev1.png',
-	// 	isActive: true
-	// },
-	// {
-	// 	id: 6,
-	// 	name: 'Доктор #2',
-	// 	position: 'Должность второго доктора',
-	// 	clinic: 'Vip Clinic',
-	// 	image: '/images/rev2.png',
-	// 	isActive: false
-	// },
-	// {
-	// 	id: 7,
-	// 	name: 'Доктор #3',
-	// 	position: 'Должность третьего доктора',
-	// 	clinic: 'Vip Clinic',
-	// 	image: '/images/rev3.png',
-	// 	isActive: false
-	// },
-	// {
-	// 	id: 8,
-	// 	name: 'Доктор #4',
-	// 	position: 'Должность четвертого доктора',
-	// 	clinic: 'Vip Clinic',
-	// 	image: '/images/rev4.png',
-	// 	isActive: false
-	// },
 ])
+
+const currentIndex = ref(0)
 
 const clearActiveImage = () => {
   items.value.forEach((item) => {
@@ -87,14 +69,37 @@ const clearActiveImage = () => {
   })
 }
 
+const setActiveImage = (index) => {
+  clearActiveImage()
+  items.value[index].isActive = true
+}
+
 const toggleActive = (clickedItem) => {
   clearActiveImage()
-
   clickedItem.isActive = !clickedItem.isActive
 }
 
+const moveLeft = () => {
+  if (currentIndex.value > 0) {
+    currentIndex.value--
+  } else {
+    currentIndex.value = items.value.length - 1
+  }
+  setActiveImage(currentIndex.value)
+}
+
+const moveRight = () => {
+  if (currentIndex.value < items.value.length - 1) {
+    currentIndex.value++
+  } else {
+    currentIndex.value = 0
+  }
+  setActiveImage(currentIndex.value)
+}
+
 const clickOutsideHandler = (event) => {
-  if (!event.target.closest('.item')) {
+  const sliderElement = document.querySelector('.slider')
+  if (sliderElement && !sliderElement.contains(event.target)) {
     clearActiveImage()
   }
 }
@@ -108,6 +113,7 @@ onUnmounted(() => {
 })
 </script>
 
+
 <style lang="scss" scoped>
 @font-face {
   src: local('TT Firs Text'), url('../TTFirs-Regular.woff2') format('woff2');
@@ -115,13 +121,20 @@ onUnmounted(() => {
   font-weight: 400;
 }
 
-.container {
-  width: 1839px;
+.slider {
+  width: 100%;
   height: 692px;
   display: flex;
+  flex-direction: column;
   font-family: 'TT Firs Text', sans-serif;
-  overflow: hidden;
   aspect-ratio: 1.5 / 1;
+}
+
+.slider-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .item {
