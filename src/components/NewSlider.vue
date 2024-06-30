@@ -10,8 +10,8 @@
       </button>
     </div>
 
-    <div class="slider-wrapper">
-      <div v-for="item in items" :key="item.id" :class="['item', { active: item.isActive }]" @click="toggleActive(item)">
+    <div ref="sliderRef" class="slider-wrapper">
+      <div v-for="(item, index) in items" :key="item.id" :class="['item', { active: item.isActive }]" @click="toggleActive(item, index)">
         <div :class="['text', { hidden: item.isActive }]">
           <span class="text__clinic">{{ item.clinic }}</span>
           <span class="text__name">{{ item.name }}</span>
@@ -59,8 +59,18 @@ const items = ref([
     image: '/images/rev4.png',
     isActive: false
   },
+  {
+    id: 5,
+    name: 'Доктор #5',
+    position: 'Должность четвертого доктора',
+    clinic: 'Vip Clinic',
+    image: '/images/rev4.png',
+    isActive: false
+  },
 ])
 
+const sliderRef = ref()
+const counter = ref()
 const currentIndex = ref(0)
 
 const clearActiveImage = () => {
@@ -74,9 +84,16 @@ const setActiveImage = (index) => {
   items.value[index].isActive = true
 }
 
-const toggleActive = (clickedItem) => {
+const toggleActive = (clickedItem, index) => {
   clearActiveImage()
+
   clickedItem.isActive = !clickedItem.isActive
+
+  if (index > 2) {
+    counter.value++
+
+    sliderRef.value.style.transform = `translateX(-216px)`
+  }
 }
 
 const moveLeft = () => {
@@ -122,12 +139,13 @@ onUnmounted(() => {
 }
 
 .slider {
-  width: 100%;
+  width: 1440px;
   height: 692px;
   display: flex;
   flex-direction: column;
   font-family: 'TT Firs Text', sans-serif;
   aspect-ratio: 1.5 / 1;
+  overflow: hidden;
 }
 
 .slider-wrapper {
