@@ -11,14 +11,18 @@
     </div>
 
     <div ref="sliderRef" class="slider-wrapper">
-      <div v-for="(item, index) in items" :key="item.id" :class="['item', { active: item.isActive }]" @click="toggleActive(item, index)">
-        <div :class="['text', { hidden: item.isActive }]">
-          <span class="text__clinic">{{ item.clinic }}</span>
-          <span class="text__name">{{ item.name }}</span>
-          <span class="text__position">{{ item.position }}</span>
-        </div>
-        <img class="img" :src="item.image" alt="" />
-      </div>
+      <template v-for="(item, index) in items" :key="item.id">
+        <Transition>
+          <div :data-index="index" v-show="isDoctorVisible(index)" :class="['item', { active: item.isActive }]" @click="toggleActive(item, index)" >
+            <div :class="['text', { hidden: item.isActive }]">
+              <span class="text__clinic">{{ item.clinic }}</span>
+              <span class="text__name">{{ item.name }}</span>
+              <span class="text__position">{{ item.position }}</span>
+            </div>
+            <img class="img" :src="item.image" alt="" />
+          </div>
+        </Transition>
+      </template>
     </div>
   </div>
 </template>
@@ -67,11 +71,40 @@ const items = ref([
     image: '/images/rev4.png',
     isActive: false
   },
+  {
+    id: 6,
+    name: 'Доктор #5',
+    position: 'Должность четвертого доктора',
+    clinic: 'Vip Clinic',
+    image: '/images/rev4.png',
+    isActive: false
+  },
+  {
+    id: 7,
+    name: 'Доктор #5',
+    position: 'Должность четвертого доктора',
+    clinic: 'Vip Clinic',
+    image: '/images/rev4.png',
+    isActive: false
+  },
 ])
 
 const sliderRef = ref()
-const counter = ref()
 const currentIndex = ref(0)
+
+const isDoctorVisible = (index) => {
+  if (currentIndex.value < 2){
+    return index < 4
+  }
+
+  if (currentIndex.value > index){
+    return currentIndex.value - index < 3
+  }
+  if (currentIndex.value < index){
+    return index - currentIndex.value === 1
+  }
+  return true
+}
 
 const clearActiveImage = () => {
   items.value.forEach((item) => {
@@ -86,14 +119,9 @@ const setActiveImage = (index) => {
 
 const toggleActive = (clickedItem, index) => {
   clearActiveImage()
+  currentIndex.value = index
 
   clickedItem.isActive = !clickedItem.isActive
-
-  if (index > 2) {
-    counter.value++
-
-    sliderRef.value.style.transform = `translateX(-216px)`
-  }
 }
 
 const moveLeft = () => {
@@ -132,14 +160,26 @@ onUnmounted(() => {
 
 
 <style lang="scss" scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: all 10s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
 @font-face {
   src: local('TT Firs Text'), url('../TTFirs-Regular.woff2') format('woff2');
   font-family: 'TT Firs Text';
   font-weight: 400;
 }
 
+
 .slider {
-  width: 1440px;
+  width: 1500px;
   height: 692px;
   display: flex;
   flex-direction: column;
@@ -152,7 +192,7 @@ onUnmounted(() => {
   display: flex;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .item {
