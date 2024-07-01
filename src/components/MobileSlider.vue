@@ -33,7 +33,6 @@ const props = defineProps(['data'])
 
 <style scoped lang="scss">
 .slider-mobile {
-  display: flex;
   flex-direction: column;
   row-gap: 8px;
   display: none;

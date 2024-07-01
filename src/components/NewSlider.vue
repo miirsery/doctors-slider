@@ -46,28 +46,10 @@
         </template>
       </div>
     </div>
-<!-- 
-    <div class="slider-tablet">
-      <div class="slider-tablet__inner">
-        <div v-for="(item, index) in items" :key="item.id" class="slider-tablet__card">
-          <div class="slider-tablet__card-text">
-            <h4 class="slider-tablet__card-clinic">{{ item.clinic }}</h4>
-            <h3 class="slider-tablet__card-name">{{ item.name }}</h3>
-            <p class="slider-tablet__card-position">{{ item.position }}</p>
-          </div>
-          <div class="slider-tablet__card-image">
-            <img class="img" :src="item.image" />
-            <button class="slider-tablet__card-button">
-              <img class="" src="/play.svg" />
-            </button>
 
-            <span class="slider-tablet__card-time">{{ item.time }}</span>
-          </div>
-        </div>
-      </div>
-    </div> -->
+    <tablet-slider v-if="items" :data="items" />
 
-    <mobile-slider v-if="items" :data="items" />
+<!--    <mobile-slider v-if="items" :data="items" />-->
 
     <button class="show-more">
       Показать еще
@@ -78,6 +60,7 @@
 <script lang="ts" setup>
 import { ref, onUnmounted } from 'vue'
 import MobileSlider from './MobileSlider.vue';
+import TabletSlider from "./TabletSlider.vue";
 
 const items = ref([
   {
@@ -468,31 +451,6 @@ onUnmounted(() => {
 
   @media screen and (max-width: 1440px) {
     max-width: 411px;
-  }
-}
-
-.slider-tablet {
-  display: none;
-  width: 652px;
-  max-height: 435px;
-  &__inner {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-  }
-  @media screen and (max-width: 768px) {
-    position: relative;
-    display: block;
-    overflow: hidden;
   }
 }
 
