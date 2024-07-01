@@ -1,31 +1,31 @@
 <template>
   <div class="new-slider">
     <div class="slider">
-    <div class="slider__header">
-      <button class="button" @click="moveLeft">
-        Left
-      </button>
+      <div class="slider__header">
+        <button class="button" @click="moveLeft">
+          Left
+        </button>
 
-      <button class="button" @click="moveRight">
-        Right
-      </button>
-    </div>
+        <button class="button" @click="moveRight">
+          Right
+        </button>
+      </div>
 
-    <div ref="sliderRef" class="slider-wrapper">
-      <template v-for="(item, index) in items" :key="item.id">
-        <transition>
-          <div v-show="isDoctorVisible(index)" :class="['item', { active: item.isActive }]" @click="toggleActive(item, index)" >
-            <div :class="['text', { hidden: item.isActive }]">
-              <span class="text__clinic">{{ item.clinic }}</span>
-              <span class="text__name">{{ item.name }}</span>
-              <span class="text__position">{{ item.position }}</span>
+      <div ref="sliderRef" class="slider-wrapper">
+        <template v-for="(item, index) in items" :key="item.id">
+          <transition>
+            <div v-show="isDoctorVisible(index)" :class="['item', { active: item.isActive }]" @click="toggleActive(item, index)">
+              <div :class="['text', { hidden: item.isActive }]">
+                <span class="text__clinic">{{ item.clinic }}</span>
+                <span class="text__name">{{ item.name }}</span>
+                <span class="text__position">{{ item.position }}</span>
+              </div>
+              <img class="img" :src="item.image" alt="" />
             </div>
-            <img class="img" :src="item.image" alt="" />
-          </div>
-        </transition>
-      </template>
+          </transition>
+        </template>
+      </div>
     </div>
-  </div>
 
     <div class="slider-mobile">
       <div v-for="(item, index) in items" :key="item.id" class="card">
@@ -43,10 +43,10 @@
             <div class="play-button__image">
               <img src="/play.svg" />
             </div>
-          
+
             Смотреть отзыв
           </button>
-  
+
           <span class="video-duration">1:50</span>
         </div>
       </div>
@@ -185,7 +185,6 @@ onUnmounted(() => {
 })
 </script>
 
-
 <style lang="scss" scoped>
 .v-enter-active,
 .v-leave-active {
@@ -204,7 +203,6 @@ onUnmounted(() => {
   font-weight: 400;
 }
 
-
 .slider {
   width: 1500px;
   height: 692px;
@@ -213,10 +211,10 @@ onUnmounted(() => {
   font-family: 'TT Firs Text', sans-serif;
   aspect-ratio: 1.5 / 1;
   overflow: hidden;
-  display: none;
+  display: block;
 
-  @media screen and (min-width: 768px) {
-    display: block;
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 }
 
@@ -307,9 +305,10 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   row-gap: 8px;
+  display: none;
 
-  @media screen and (min-width: 768px) {
-    display: none !important;
+  @media screen and (max-width: 768px) {
+    display: block !important;
   }
 }
 
@@ -400,7 +399,6 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     margin-right: 12px;
-
   }
 }
 
@@ -415,5 +413,10 @@ onUnmounted(() => {
   background-color: #fff;
   border-radius: 12px;
   margin-top: 12px;
+  display: none;
+  
+  @media screen and (max-width: 768px) {
+    display: block !important;
+  }
 }
 </style>
