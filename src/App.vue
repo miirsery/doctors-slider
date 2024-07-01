@@ -15,7 +15,7 @@ import NewSlider from "./components/NewSlider.vue";
 
 <style scoped>
 .container {
-  max-width: 1440px;
+  max-width: 1904px;
   padding: 0 15px;
   margin: 0 auto;
   width: 100%;

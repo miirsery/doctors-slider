@@ -146,7 +146,7 @@ const setActiveSlide = (index: number) => {
   }
 
   @font-face {
-    src: local('TT Firs Text'), url('../TTFirs-Regular.woff2') format('woff2');
+    src: local('TT Firs Text'), url('../../../../public/TTFirs-Regular.woff2') format('woff2');
     font-family: 'TT Firs Text';
     font-weight: 400;
   }
