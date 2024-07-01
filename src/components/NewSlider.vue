@@ -46,7 +46,7 @@
         </template>
       </div>
     </div>
-
+<!-- 
     <div class="slider-tablet">
       <div class="slider-tablet__inner">
         <div v-for="(item, index) in items" :key="item.id" class="slider-tablet__card">
@@ -65,32 +65,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="slider-mobile">
-      <div v-for="(item, index) in items" :key="item.id" class="card">
-        <div class="card-header">
-          <div class="card-image" :style="{ backgroundImage: 'url(' + item.image + ')' }"></div>
-        </div>
-        <div class="card-body">
-          <h4 class="clinic-name">{{ item.clinic }}</h4>
-          <h3 class="doctor-name">{{ item.name }}</h3>
-          <p class="doctor-title">{{ item.position }}</p>
-        </div>
-
-        <div class="card-footer">
-          <button class="play-button">
-            <div class="play-button__image">
-              <img src="/play.svg" />
-            </div>
-          
-            Смотреть отзыв
-          </button>
-  
-          <span class="video-duration">1:50</span>
-        </div>
-      </div>
-    </div>
+    <mobile-slider v-if="items" :data="items" />
 
     <button class="show-more">
       Показать еще
@@ -100,6 +77,7 @@
 
 <script lang="ts" setup>
 import { ref, onUnmounted } from 'vue'
+import MobileSlider from './MobileSlider.vue';
 
 const items = ref([
   {
@@ -254,10 +232,6 @@ onUnmounted(() => {
   font-weight: 400;
 }
 
-.new-slider {
-  max-width: fit-content;
-}
-
 
 .slider {
   width: 1839px;
@@ -318,8 +292,6 @@ onUnmounted(() => {
   @media screen and (max-width: 1440px) {
     max-width: 419px;
   }
-
-
 
   &-button {
     width: 80px;
@@ -499,122 +471,6 @@ onUnmounted(() => {
   }
 }
 
-.slider-mobile {
-  display: flex;
-  flex-direction: column;
-  row-gap: 8px;
-
-  @media screen and (min-width: 768px) {
-    display: none !important;
-  }
-}
-
-.card {
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #fff;
-  height: 466px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-family: 'TT Firs Text', sans-serif;
-}
-
-.card-header {
-  position: relative;
-}
-
-.card-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  background-position: 0 0px;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  border-radius: 12px;
-}
-
-.card-body {
-  padding: 16px;
-  text-align: left;
-  flex-grow: 1;
-}
-
-.doctor-name {
-  color: #1C120D;
-  margin-top: 8px;
-  font-size: 24px;
-  font-weight: 450;
-  line-height: 24px;
-  max-width: 217px;
-}
-
-.doctor-title,
-.clinic-name {
-  font-size: 14px;
-  color: #96918B;
-  margin: 0;
-  max-width: 217px;
-}
-
-.doctor-title {
-  margin-top: 4px;
-}
-
-.card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  border: 1px solid #BBBBBB66;
-  border-radius: 12px;
-  margin: 0 12px 12px 12px;
-  font-size: 14px;
-  line-height: 14px;
-  color: #1C120D;
-}
-
-.play-button {
-  display: flex;
-  align-items: center;
-  background: none;
-  color: #1C120D;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-  padding: 0;
-
-  &__image {
-    background-color: #F1EFE9;
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-
-  }
-}
-
-.show-more {
-  display: none;
-  width: 100%;
-  padding: 24px 12px;
-  color: #1C120D;
-  font-size: 14px;
-  line-height: 16.8px;
-  text-align: center;
-  border-radius: 12px;
-  background-color: #fff;
-  margin-top: 12px;
-
-  @media screen and (max-width: 768px) {
-    display: block;
-  }
-}
-
 .slider-tablet {
   display: none;
   width: 652px;
@@ -637,6 +493,23 @@ onUnmounted(() => {
     position: relative;
     display: block;
     overflow: hidden;
+  }
+}
+
+.show-more {
+  display: none;
+  width: 100%;
+  padding: 24px 12px;
+  color: #1C120D;
+  font-size: 14px;
+  line-height: 16.8px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: #fff;
+  margin-top: 12px;
+
+  @media screen and (max-width: 768px) {
+    display: block;
   }
 }
 
