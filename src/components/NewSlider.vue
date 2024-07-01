@@ -1,51 +1,71 @@
 <template>
   <div class="new-slider">
     <div class="slider">
-    <div class="slider__header">
-      <button class="slider__button" @click="moveLeft">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.5059 6.99927L10.5059 13.9993L17.5059 20.9993" stroke="#1C120D" stroke-width="1.07865" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <div class="slider__header">
+        <button class="slider__button" @click="moveLeft">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5059 6.99927L10.5059 13.9993L17.5059 20.9993" stroke="#1C120D" stroke-width="1.07865" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
 
-      </button>
+        </button>
 
-      <button class="slider__button" @click="moveRight">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10.4941 21.0007L17.4941 14.0007L10.4941 7.00073" stroke="#1C120D" stroke-width="1.07865" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <button class="slider__button" @click="moveRight">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.4941 21.0007L17.4941 14.0007L10.4941 7.00073" stroke="#1C120D" stroke-width="1.07865" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
 
-      </button>
-    </div>
+        </button>
+      </div>
 
-    <div ref="sliderRef" class="slider-wrapper">
-      <template v-for="(item, index) in items" :key="item.id">
-        <transition>
-          <div v-show="isDoctorVisible(index)" :class="['item', { active: item.isActive }]" @click="toggleActive(item, index)" >
-            <div :class="['text', { hidden: item.isActive }]">
-              <span class="text__clinic">{{ item.clinic }}</span>
-              <span class="text__name">{{ item.name }}</span>
-              <span class="text__position">{{ item.position }}</span>
+      <div ref="sliderRef" class="slider-wrapper">
+        <template v-for="(item, index) in items" :key="item.id">
+          <transition>
+            <div v-show="isDoctorVisible(index)" :class="['item', { active: item.isActive }]" @click="toggleActive(item, index)" >
+              <div :class="['text', { hidden: item.isActive }]">
+                <span class="text__clinic">{{ item.clinic }}</span>
+                <span class="text__name">{{ item.name }}</span>
+                <span class="text__position">{{ item.position }}</span>
 
-            </div>
-            <img class="img" :src="item.image" alt="" />
+              </div>
+              <img class="img" :src="item.image" alt="" />
 
-            <div class="slider-image__items">
-              <button class="slider-image__items-button">
-                <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.2245 8.70123L2.48753 0.226436C2.23907 0.0834134 1.9545 0.0053347 1.66321 0.000263788C1.37192 -0.00480712 1.08446 0.0633135 0.830541 0.19759C0.579036 0.329782 0.369526 0.522562 0.223555 0.756107C0.0775834 0.989651 0.000420239 1.25553 0 1.5264V18.4741C0.00189507 18.8804 0.175348 19.2694 0.482229 19.5555C0.78911
-                  19.8416 1.2043 20.0015 1.63653 20C1.93822 19.9999 2.23405 19.9217 2.49162 19.774L17.2245 11.2992C17.4613 11.1636 17.6571 10.9729 17.7929 10.7456C17.9287 10.5182 18 10.2619 18 10.0012C18 9.74048 17.9287 9.48415 17.7929 9.25683C17.6571 9.02951 17.4613 8.83884
-                   17.2245 8.70315V8.70123ZM1.63653 18.4558V1.5389L16.348 10.0002L1.63653 18.4558Z" fill="#1C120D"/>
-                </svg>
-              </button>
-              <div class="slider-image__items-time">
-                {{ item.time }}
+              <div class="slider-image__items">
+                <button class="slider-image__items-button">
+                  <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.2245 8.70123L2.48753 0.226436C2.23907 0.0834134 1.9545 0.0053347 1.66321 0.000263788C1.37192 -0.00480712 1.08446 0.0633135 0.830541 0.19759C0.579036 0.329782 0.369526 0.522562 0.223555 0.756107C0.0775834 0.989651 0.000420239 1.25553 0 1.5264V18.4741C0.00189507 18.8804 0.175348 19.2694 0.482229 19.5555C0.78911
+                    19.8416 1.2043 20.0015 1.63653 20C1.93822 19.9999 2.23405 19.9217 2.49162 19.774L17.2245 11.2992C17.4613 11.1636 17.6571 10.9729 17.7929 10.7456C17.9287 10.5182 18 10.2619 18 10.0012C18 9.74048 17.9287 9.48415 17.7929 9.25683C17.6571 9.02951 17.4613 8.83884
+                     17.2245 8.70315V8.70123ZM1.63653 18.4558V1.5389L16.348 10.0002L1.63653 18.4558Z" fill="#1C120D"/>
+                  </svg>
+                </button>
+                <div class="slider-image__items-time">
+                  {{ item.time }}
+                </div>
               </div>
             </div>
-          </div>
-        </transition>
-      </template>
+          </transition>
+        </template>
+      </div>
     </div>
-  </div>
+
+    <div class="slider-tablet">
+      <div class="slider-tablet__inner">
+        <div v-for="(item, index) in items" :key="item.id" class="slider-tablet__card">
+          <div class="slider-tablet__card-text">
+            <h4 class="slider-tablet__card-clinic">{{ item.clinic }}</h4>
+            <h3 class="slider-tablet__card-name">{{ item.name }}</h3>
+            <p class="slider-tablet__card-position">{{ item.position }}</p>
+          </div>
+          <div class="slider-tablet__card-image">
+            <img class="img" :src="item.image" />
+            <button class="slider-tablet__card-button">
+              <img class="" src="/play.svg" />
+            </button>
+
+            <span class="slider-tablet__card-time">{{ item.time }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="slider-mobile">
       <div v-for="(item, index) in items" :key="item.id" class="card">
@@ -79,7 +99,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
+import { ref, onUnmounted } from 'vue'
 
 const items = ref([
   {
@@ -216,7 +236,7 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .v-enter-active,
 .v-leave-active {
-  transition: all 20s cubic-bezier(1, 0.3, 0.3, 1);
+  transition: all 0.5s cubic-bezier(0.5, 0.3, 0.3, 0.5);
 }
 
 .v-enter-from {
@@ -246,10 +266,15 @@ onUnmounted(() => {
   font-family: 'TT Firs Text', sans-serif;
   aspect-ratio: 1.5 / 1;
   overflow: hidden;
-  display: none;
+  display: block;
 
-  @media screen and (min-width: 768px) {
-    display: block;
+  @media screen and (max-width: 1440px) {
+    width: 1376px;
+    height: 618px;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 
   &__header {
@@ -257,6 +282,10 @@ onUnmounted(() => {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 40px;
+
+    @media screen and (max-width: 1440px) {
+      margin-bottom: 36px;
+    }
   }
 
   &__button {
@@ -280,12 +309,17 @@ onUnmounted(() => {
   justify-content: space-between;
   align-items: flex-end;
   position: absolute;
+  opacity: 0;
   right: 16px;
   bottom: 16px;
   z-index: 100;
   overflow: hidden;
-  transition: height 1.5s ease;
-  transition-delay: 0.8s;
+
+  @media screen and (max-width: 1440px) {
+    max-width: 419px;
+  }
+
+
 
   &-button {
     width: 80px;
@@ -298,10 +332,20 @@ onUnmounted(() => {
     border-radius: 12px;
     cursor: pointer;
 
+    @media screen and (max-width: 1440px) {
+      width: 60px;
+      height: 60px;
+    }
+
     svg {
       width: 27px;
       height: 32px;
       padding-left: 5px;
+
+      @media screen and (max-width: 1440px) {
+        width: 21px;
+        height: 24px;
+      }
     }
   }
 
@@ -309,6 +353,11 @@ onUnmounted(() => {
     font-weight: 700;
     font-size: 30px;
     line-height: 35px;
+
+    @media screen and (max-width: 1440px) {
+      font-size: 28px;
+      line-height: 29px;;
+    }
   }
 }
 
@@ -326,13 +375,18 @@ onUnmounted(() => {
   position: relative;
   display: flex;
   border-radius: 16px;
-  transition: all 0.9s cubic-bezier(.17,.3,.71,.64);
+  transition: all 0.8s cubic-bezier(.29,.87,.91,.89);
   cursor: pointer;
   overflow: hidden;
   background-color: #fff;
 
   &:not(:last-child){
     margin-right: 15px;
+  }
+
+  @media screen and (max-width: 1440px) {
+    max-width: 162px;
+    max-height: 518px;
   }
 }
 
@@ -343,8 +397,12 @@ onUnmounted(() => {
   height: 100%;
   position: absolute;
   object-fit: cover;
-  transition: all 0.9s cubic-bezier(.17,.3,.71,.64);
+  transition: all 0.8s cubic-bezier(.29,.87,.91,.89);
   z-index: 1;
+
+  @media screen and (max-width: 1440px) {
+    max-width: 162px;
+  }
 }
 
 .text {
@@ -356,16 +414,26 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   background: #fff;
-  transition: all 0.9s cubic-bezier(.17,.3,.71,.64);
+  transition: all 0.8s cubic-bezier(.29,.87,.91,.89);
   padding: 32px;
   z-index: 0;
   gap: 17px;
+
+  @media screen and (max-width: 1440px) {
+    max-width: 162px;
+    gap: 14px;
+  }
 
   &__clinic {
     font-size: 20px;
     line-height: 120%;
     letter-spacing: -0.02em;
     color: #96918b;
+
+    @media screen and (max-width: 1440px) {
+      font-size: 18px;
+      line-height: 100%;
+    }
   }
 
   &__name {
@@ -374,6 +442,12 @@ onUnmounted(() => {
     letter-spacing: -0.03em;
     color: #1c120d;
     text-align: left;
+
+    @media screen and (max-width: 1440px) {
+      max-width: 327px;
+      font-size: 40px;
+      line-height: 107%;
+    }
   }
 
   &__position {
@@ -381,6 +455,10 @@ onUnmounted(() => {
     line-height: 120%;
     letter-spacing: 0.05em;
     color: #96918b;
+
+    @media screen and (max-width: 1440px) {
+      font-size: 18px;
+    }
   }
 }
 
@@ -388,18 +466,37 @@ onUnmounted(() => {
   max-width: 1143px;
   z-index: 10;
 
+  @media screen and (max-width: 1440px) {
+    max-width: 858px;
+  }
+
   .slider-image__items {
+    animation-name: slider-image__items-animation;
+    animation-duration: 0.8s;
+    opacity: 1;
     height: 80px;
+
+    @media screen and (max-width: 1440px) {
+      height: 60px;
+    }
   }
 }
 
 .item.active .img {
   right: 0;
   max-width: 597px;
+
+  @media screen and (max-width: 1440px) {
+    max-width: 447px;
+  }
 }
 
 .item.active .text {
   max-width: 546px;
+
+  @media screen and (max-width: 1440px) {
+    max-width: 411px;
+  }
 }
 
 .slider-mobile {
@@ -502,6 +599,7 @@ onUnmounted(() => {
 }
 
 .show-more {
+  display: none;
   width: 100%;
   padding: 24px 12px;
   color: #1C120D;
@@ -511,5 +609,55 @@ onUnmounted(() => {
   border-radius: 12px;
   background-color: #fff;
   margin-top: 12px;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+}
+
+.slider-tablet {
+  display: none;
+  width: 652px;
+  max-height: 435px;
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+  }
+  @media screen and (max-width: 768px) {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+}
+
+@keyframes slider-image__items-animation {
+  0% {
+    width: 0;
+    opacity: 0;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+    height: 0;
+    opacity: 0;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    height: 80px;
+  }
 }
 </style>
