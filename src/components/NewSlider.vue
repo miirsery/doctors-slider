@@ -197,7 +197,7 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.5s cubic-bezier(0.5, 0.3, 0.3, 0.5);
+  transition: all 0.1s cubic-bezier(0.1, 0.3, 0.3, 0.1);
 }
 
 .v-enter-from {
@@ -339,7 +339,7 @@ onUnmounted(() => {
   position: relative;
   display: flex;
   border-radius: 16px;
-  transition: all 0.8s cubic-bezier(.29,.87,.91,.89);
+  transition: all 1s cubic-bezier(.1,.87,.91,.89);
   cursor: pointer;
   overflow: hidden;
   background-color: #fff;
@@ -361,8 +361,9 @@ onUnmounted(() => {
   height: 100%;
   position: absolute;
   object-fit: cover;
-  transition: all 0.8s cubic-bezier(.29,.87,.91,.89);
+  transition: all 1s cubic-bezier(.1,.87,.91,.89);
   z-index: 1;
+  border-radius: 16px;
 
   @media screen and (max-width: 1919px) {
     max-width: 162px;
@@ -378,7 +379,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   background: #fff;
-  transition: all 0.8s cubic-bezier(.29,.87,.91,.89);
+  transition: all 1s cubic-bezier(.1,.87,.91,.89);
   padding: 32px;
   z-index: 0;
   gap: 17px;
