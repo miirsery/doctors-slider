@@ -37,7 +37,7 @@ const props = defineProps(['data'])
   row-gap: 8px;
   display: none;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     display: block !important;
   }
 }
@@ -62,7 +62,7 @@ const props = defineProps(['data'])
   width: 100%;
   height: 200px;
   object-fit: cover;
-  background-position: 0 0px;
+  background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100%;
   border-radius: 12px;

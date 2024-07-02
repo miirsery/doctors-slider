@@ -49,7 +49,7 @@
 
     <tablet-slider v-if="items" :data="items" />
 
-<!--    <mobile-slider v-if="items" :data="items" />-->
+    <mobile-slider v-if="items" :data="items" />
 
     <button class="show-more">
       Показать еще
@@ -215,6 +215,15 @@ onUnmounted(() => {
   font-weight: 400;
 }
 
+.new-slider {
+  display: flex;
+  justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
 
 .slider {
   width: 1839px;
@@ -223,15 +232,15 @@ onUnmounted(() => {
   font-family: 'TT Firs Text', sans-serif;
   aspect-ratio: 1.5 / 1;
   overflow: hidden;
-  display: block;
+  display: none;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1919px) {
     width: 1376px;
     height: 618px;
   }
 
-  @media screen and (max-width: 768px) {
-    display: none;
+  @media screen and (min-width: 1440px) {
+    display: flex;
   }
 
   &__header {
@@ -240,7 +249,7 @@ onUnmounted(() => {
     justify-content: flex-end;
     margin-bottom: 40px;
 
-    @media screen and (max-width: 1440px) {
+    @media screen and (max-width: 1919px) {
       margin-bottom: 36px;
     }
   }
@@ -287,7 +296,7 @@ onUnmounted(() => {
     border-radius: 12px;
     cursor: pointer;
 
-    @media screen and (max-width: 1440px) {
+    @media screen and (max-width: 1919px) {
       width: 60px;
       height: 60px;
     }
@@ -297,7 +306,7 @@ onUnmounted(() => {
       height: 32px;
       padding-left: 5px;
 
-      @media screen and (max-width: 1440px) {
+      @media screen and (max-width: 1919px) {
         width: 21px;
         height: 24px;
       }
@@ -309,7 +318,7 @@ onUnmounted(() => {
     font-size: 30px;
     line-height: 35px;
 
-    @media screen and (max-width: 1440px) {
+    @media screen and (max-width: 1919px) {
       font-size: 28px;
       line-height: 29px;;
     }
@@ -339,7 +348,7 @@ onUnmounted(() => {
     margin-right: 15px;
   }
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1919px) {
     max-width: 162px;
     max-height: 518px;
   }
@@ -355,7 +364,7 @@ onUnmounted(() => {
   transition: all 0.8s cubic-bezier(.29,.87,.91,.89);
   z-index: 1;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1919px) {
     max-width: 162px;
   }
 }
@@ -374,7 +383,7 @@ onUnmounted(() => {
   z-index: 0;
   gap: 17px;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1919px) {
     max-width: 162px;
     gap: 14px;
   }
@@ -385,7 +394,7 @@ onUnmounted(() => {
     letter-spacing: -0.02em;
     color: #96918b;
 
-    @media screen and (max-width: 1440px) {
+    @media screen and (max-width: 1919px) {
       font-size: 18px;
       line-height: 100%;
     }
@@ -398,7 +407,7 @@ onUnmounted(() => {
     color: #1c120d;
     text-align: left;
 
-    @media screen and (max-width: 1440px) {
+    @media screen and (max-width: 1919px) {
       max-width: 327px;
       font-size: 40px;
       line-height: 107%;
@@ -411,7 +420,7 @@ onUnmounted(() => {
     letter-spacing: 0.05em;
     color: #96918b;
 
-    @media screen and (max-width: 1440px) {
+    @media screen and (max-width: 1919px) {
       font-size: 18px;
     }
   }
@@ -421,7 +430,7 @@ onUnmounted(() => {
   max-width: 1143px;
   z-index: 10;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1919px) {
     max-width: 858px;
   }
 
@@ -431,7 +440,7 @@ onUnmounted(() => {
     opacity: 1;
     height: 80px;
 
-    @media screen and (max-width: 1440px) {
+    @media screen and (max-width: 1919px) {
       height: 60px;
     }
   }
@@ -441,7 +450,7 @@ onUnmounted(() => {
   right: 0;
   max-width: 597px;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1919px) {
     max-width: 447px;
   }
 }
@@ -449,7 +458,7 @@ onUnmounted(() => {
 .item.active .text {
   max-width: 546px;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1919px) {
     max-width: 411px;
   }
 }
@@ -466,7 +475,7 @@ onUnmounted(() => {
   background-color: #fff;
   margin-top: 12px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     display: block;
   }
 }
