@@ -281,8 +281,8 @@ onUnmounted(() => {
   z-index: 100;
   overflow: hidden;
 
-  @media screen and (max-width: 1440px) {
-    max-width: 419px;
+  @media screen and (max-width: 1919px) {
+    max-width: 50%;
   }
 
   &-button {
